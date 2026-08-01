@@ -29,13 +29,23 @@ stages:
           #     tags: |
           #       $(tag)
           #       latest
+          # - task: Docker@2
+          #   inputs:
+          #     containerRegistry: 'ACR-service-connection'
+          #     repository: '$(userrepository)'
+          #     command: 'buildAndPush'
+          #     Dockerfile: 'user-service/dockerfile'
+          #     buildContext: 'user-service'
+          #     tags: |
+          #       $(tag)
+          #       latest
           - task: Docker@2
             inputs:
               containerRegistry: 'ACR-service-connection'
-              repository: '$(userrepository)'
+              repository: '$(paymentrepository)'
               command: 'buildAndPush'
-              Dockerfile: 'user-service/dockerfile'
-              buildContext: 'user-service'
+              Dockerfile: 'payment-service/dockerfile'
+              buildContext: 'payment-service'
               tags: |
                 $(tag)
                 latest
