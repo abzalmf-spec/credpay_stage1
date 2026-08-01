@@ -34,7 +34,7 @@ stages:
               containerRegistry: 'ACR-service-connection'
               repository: '$(userrepository)'
               command: 'buildAndPush'
-              Dockerfile: 'user-service/Dockerfile'
+              Dockerfile: 'user-service/dockerfile'
               buildContext: 'user-service'
               tags: |
                 $(tag)
