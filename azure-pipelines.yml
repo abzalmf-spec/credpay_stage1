@@ -39,6 +39,13 @@ stages:
               command: 'plan'
               workingDirectory: 'terraform'
               environmentServiceNameAzureRM: 'HDFC'
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'apply'
+              workingDirectory: 'terraform'
+              commandOptions: '--auto-approve'
+              environmentServiceNameAzureRM: 'HDFC'
 
 
 
