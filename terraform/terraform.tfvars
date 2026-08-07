@@ -13,3 +13,4 @@ database_name = "credpay"
 log_retention_days = 30
 key_vault_name = "credkey1"
 key_vault_resource_group_name = "credpayRG"
+key_vault_location = "canadacentral"
