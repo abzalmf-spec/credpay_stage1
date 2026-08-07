@@ -1,5 +1,5 @@
 locals {
-  name_prefix ="credpays1"
+  name_prefix ="credpays2"
   tags = {
     project = "credpay"
     managed-by = "terraform"
