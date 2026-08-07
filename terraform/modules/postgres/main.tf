@@ -13,6 +13,7 @@ resource "azurerm_postgresql_flexible_server" "pgs" {
     resource_group_name = var.resource_group_name
     location = var.location
     version = var.postgres_version
+    zone = "2"
     public_network_access_enabled = true
     administrator_login = var.admin_username
     administrator_password = random_password.admin.result
