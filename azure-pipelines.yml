@@ -37,6 +37,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
+              workingDirectory: 'terraform'
               environmentServiceNameAzureRM: 'HDFC'
 
 
