@@ -13,12 +13,36 @@ variables:
   paymentrepository: 'credpay/payment-service'
   tag: '$(Build.BuildId)'
 stages:
-  - stage: DockerBuild
-    displayName: docker build
+  - stage: terraform
+    displayName: terraform infra
     jobs:
-      - job: buildpushimages
+      - job: terraformapply
+        displayName: terraform init and apply
         steps:
           - checkout: self
+          - task: TerraformInstaller@1
+            inputs:
+              terraformVersion: 'latest'
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'init'
+              backendServiceArm: 'HDFC'
+              backendAzureRmResourceGroupName: 'credpayRG'
+              backendAzureRmStorageAccountName: 'credpayproject1'
+              backendAzureRmContainerName: 'statefile'
+              backendAzureRmKey: 'credpay.terraform.tfstate'
+
+
+
+
+
+  # - stage: DockerBuild
+  #   displayName: docker build
+  #   jobs:
+  #     - job: buildpushimages
+  #       steps:
+  #         - checkout: self
           # - task: Docker@2
           #   inputs:
           #     containerRegistry: 'ACR-service-connection'
@@ -39,16 +63,16 @@ stages:
           #     tags: |
           #       $(tag)
           #       latest
-          - task: Docker@2
-            inputs:
-              containerRegistry: 'ACR-service-connection'
-              repository: '$(paymentrepository)'
-              command: 'buildAndPush'
-              Dockerfile: 'payment-service/dockerfile'
-              buildContext: 'payment-service'
-              tags: |
-                $(tag)
-                latest
+          # - task: Docker@2
+          #   inputs:
+          #     containerRegistry: 'ACR-service-connection'
+          #     repository: '$(paymentrepository)'
+          #     command: 'buildAndPush'
+          #     Dockerfile: 'payment-service/dockerfile'
+          #     buildContext: 'payment-service'
+          #     tags: |
+          #       $(tag)
+          #       latest
           
 
 
