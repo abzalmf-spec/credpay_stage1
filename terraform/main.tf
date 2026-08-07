@@ -6,15 +6,15 @@ locals {
   }
 }
 module "resource_group" {
-  source = "./Modules/ResourceGroup"
+  source = "./Modules/Resourcegroup"
   name = "rg-${local.name_prefix}"
   location = var.location
   tags = local.tags
 }
 module "networking" {
-  source = "./Modules/Networking"
+  source = "./Modules/networking"
   name_prefix = local.name_prefix
-  resource_group_name = module.resource_group.name
+  resource_group_name = module.Resourcegroup.name
   location = module.resource_group.location
   vnet_address_space = var.vnet_address_space
   aks_subnet_prefix = var.aks_subnet_prefix
@@ -22,17 +22,17 @@ module "networking" {
   tags = local.tags
 }
 module "monitoring" {
-  source = "./Modules/Monitoring"
+  source = "./Modules/monitoring"
   name_prefix = local.name_prefix
-  resource_group_name = module.resource_group.name
+  resource_group_name = module.Resourcegroup.name
   location = module.resource_group.location
   retention_days = var.log_retention_days
   tags = local.tags
 }
 module "postgres" {
-  source = "./Modules/Postgres"
+  source = "./Modules/postgres"
   name_prefix = local.name_prefix
-  resource_group_name = module.resource_group.name
+  resource_group_name = module.Rresourcegroup.name
   location = module.resource_group.location
   admin_username = var.postgres_admin_username
   database_name = var.database_name
@@ -42,7 +42,7 @@ module "postgres" {
 module "aks" {
   source = "./Modules/aks"
   name_prefix = local.name_prefix
-  resource_group_name = module.resource_group.name
+  resource_group_name = module.Resourcegroup.name
   location = module.resource_group.location
   aks_subnet_id = module.networking.subnet_ids["aks"]
   node_count = var.node_count
@@ -60,5 +60,5 @@ module "keyvault" {
   postgres_database_name = module.postgres.database_name
   postgres_admin_username = module.postgres.admin_username
   postgres_admin_password = module.postgres.admin_password
-  key_vault_location = module.resource_group.location
+  key_vault_location = module.Resourcegroup.location
 }
