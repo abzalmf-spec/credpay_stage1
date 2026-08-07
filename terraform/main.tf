@@ -14,7 +14,7 @@ module "resource_group" {
 module "networking" {
   source = "./modules/networking"
   name_prefix = local.name_prefix
-  resource_group_name = module.Resourcegroup.name
+  resource_group_name = module.Resource_group.name
   location = module.resource_group.location
   vnet_address_space = var.vnet_address_space
   aks_subnet_prefix = var.aks_subnet_prefix
@@ -24,7 +24,7 @@ module "networking" {
 module "monitoring" {
   source = "./modules/monitoring"
   name_prefix = local.name_prefix
-  resource_group_name = module.Resourcegroup.name
+  resource_group_name = module.Resource_group.name
   location = module.resource_group.location
   retention_days = var.log_retention_days
   tags = local.tags
@@ -32,7 +32,7 @@ module "monitoring" {
 module "postgres" {
   source = "./modules/postgres"
   name_prefix = local.name_prefix
-  resource_group_name = module.Rresourcegroup.name
+  resource_group_name = module.Rresource_group.name
   location = module.resource_group.location
   admin_username = var.postgres_admin_username
   database_name = var.database_name
@@ -42,7 +42,7 @@ module "postgres" {
 module "aks" {
   source = "./modules/aks"
   name_prefix = local.name_prefix
-  resource_group_name = module.Resourcegroup.name
+  resource_group_name = module.Resource_group.name
   location = module.resource_group.location
   aks_subnet_id = module.networking.subnet_ids["aks"]
   node_count = var.node_count
@@ -60,5 +60,5 @@ module "keyvault" {
   postgres_database_name = module.postgres.database_name
   postgres_admin_username = module.postgres.admin_username
   postgres_admin_password = module.postgres.admin_password
-  key_vault_location = module.Resourcegroup.location
+  key_vault_location = module.Resource_group.location
 }
