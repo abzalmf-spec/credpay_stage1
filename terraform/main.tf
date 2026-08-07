@@ -6,13 +6,13 @@ locals {
   }
 }
 module "resource_group" {
-  source = "./Modules/ResourceGroup"
+  source = "./Modules/Resourcegroup"
   name = "rg-${local.name_prefix}"
   location = var.location
   tags = local.tags
 }
 module "networking" {
-  source = "./Modules/Networking"
+  source = "./Modules/networking"
   name_prefix = local.name_prefix
   resource_group_name = module.resource_group.name
   location = module.resource_group.location
@@ -22,7 +22,7 @@ module "networking" {
   tags = local.tags
 }
 module "monitoring" {
-  source = "./Modules/Monitoring"
+  source = "./Modules/monitoring"
   name_prefix = local.name_prefix
   resource_group_name = module.resource_group.name
   location = module.resource_group.location
@@ -30,7 +30,7 @@ module "monitoring" {
   tags = local.tags
 }
 module "postgres" {
-  source = "./Modules/Postgres"
+  source = "./Modules/postgres"
   name_prefix = local.name_prefix
   resource_group_name = module.resource_group.name
   location = module.resource_group.location
