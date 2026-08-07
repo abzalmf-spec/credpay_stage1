@@ -33,6 +33,11 @@ stages:
               backendAzureRmStorageAccountName: 'credpayproject1'
               backendAzureRmContainerName: 'statefile'
               backendAzureRmKey: 'credpay.terraform.tfstate'
+          - task: TerraformTask@5
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              environmentServiceNameAzureRM: 'HDFC'
 
 
 
