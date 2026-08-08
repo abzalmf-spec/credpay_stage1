@@ -50,6 +50,7 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'destroy'
+              workingDirectory: 'terraform'
               environmentServiceNameAzureRM: 'HDFC'
 
 
